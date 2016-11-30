@@ -1,0 +1,166 @@
+package com.example.alent.admin;
+
+import android.util.Log;
+
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+
+import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.client.methods.HttpGet;
+import cz.msebera.android.httpclient.client.methods.HttpPost;
+import cz.msebera.android.httpclient.client.params.ClientPNames;
+import cz.msebera.android.httpclient.client.params.CookiePolicy;
+import cz.msebera.android.httpclient.entity.StringEntity;
+import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
+import cz.msebera.android.httpclient.params.BasicHttpParams;
+import cz.msebera.android.httpclient.params.HttpConnectionParams;
+import cz.msebera.android.httpclient.params.HttpParams;
+import cz.msebera.android.httpclient.protocol.BasicHttpContext;
+import cz.msebera.android.httpclient.protocol.HttpContext;
+import cz.msebera.android.httpclient.util.EntityUtils;
+
+/**
+ * Created by AlenT on 28.11.2016.
+ */
+
+
+
+public class HttpRequest {
+    DefaultHttpClient httpClient;
+    HttpContext localContext;
+    private String ret;
+
+    HttpResponse response = null;
+    HttpPost httpPost = null;
+    HttpGet httpGet = null;
+
+    public HttpRequest(){
+        HttpParams myParams = new BasicHttpParams();
+
+        HttpConnectionParams.setConnectionTimeout(myParams, 10000);
+        HttpConnectionParams.setSoTimeout(myParams, 10000);
+        httpClient = new DefaultHttpClient(myParams);
+        localContext = new BasicHttpContext();
+    }
+
+    public void clearCookies() {
+        httpClient.getCookieStore().clear();
+    }
+
+    public void abort() {
+        try {
+            if (httpClient != null) {
+                System.out.println("Abort.");
+                httpPost.abort();
+            }
+        } catch (Exception e) {
+            System.out.println("Your App Name Here" + e);
+        }
+    }
+
+    public String sendPost(String url, String data) {
+        return sendPost(url, data, null);
+    }
+
+    public String sendJSONPost(String url, JSONObject data) {
+        return sendPost(url, data.toString(), "application/json");
+    }
+
+    public String sendPost(String url, String data, String contentType) {
+        ret = null;
+
+        httpClient.getParams().setParameter(ClientPNames.COOKIE_POLICY, CookiePolicy.RFC_2109);
+
+        httpPost = new HttpPost(url);
+        response = null;
+
+        StringEntity tmp = null;
+
+        Log.d("Your App Name Here", "Setting httpPost headers");
+
+        httpPost.setHeader("User-Agent", "SET YOUR USER AGENT STRING HERE");
+        httpPost.setHeader("Accept", "text/html,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5");
+
+        if (contentType != null) {
+            httpPost.setHeader("Content-Type", contentType);
+        } else {
+            httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+        }
+
+        tmp = new StringEntity(data,"UTF-8");
+
+        httpPost.setEntity(tmp);
+
+        Log.d("Your App Name Here", url + "?" + data);
+
+        try {
+            response = httpClient.execute(httpPost,localContext);
+
+            if (response != null) {
+                ret = EntityUtils.toString(response.getEntity());
+            }
+        } catch (Exception e) {
+            Log.e("Your App Name Here", "HttpUtils: " + e);
+        }
+
+        Log.d("Your App Name Here", "Returning value:" + ret);
+
+        return ret;
+    }
+
+    public String sendGet(String url) {
+        httpGet = new HttpGet(url);
+
+        try {
+            response = httpClient.execute(httpGet);
+        } catch (Exception e) {
+            Log.e("Your App Name Here", e.getMessage());
+        }
+
+        //int status = response.getStatusLine().getStatusCode();
+
+        // we assume that the response body contains the error message
+        try {
+            ret = EntityUtils.toString(response.getEntity());
+        } catch (IOException e) {
+            Log.e("Your App Name Here", e.getMessage());
+        }
+
+        return ret;
+    }
+
+    public InputStream getHttpStream(String urlString) throws IOException {
+        InputStream in = null;
+        int response = -1;
+
+        URL url = new URL(urlString);
+        URLConnection conn = url.openConnection();
+
+        if (!(conn instanceof HttpURLConnection))
+            throw new IOException("Not an HTTP connection");
+
+        try{
+            HttpURLConnection httpConn = (HttpURLConnection) conn;
+            httpConn.setAllowUserInteraction(false);
+            httpConn.setInstanceFollowRedirects(true);
+            httpConn.setRequestMethod("GET");
+            httpConn.connect();
+
+            response = httpConn.getResponseCode();
+
+            if (response == HttpURLConnection.HTTP_OK) {
+                in = httpConn.getInputStream();
+            }
+        } catch (Exception e) {
+            throw new IOException("Error connecting");
+        } // end try-catch
+
+        return in;
+    }
+}
