@@ -25,7 +25,7 @@ public class ActivityAdmin extends AppCompatActivity {
 
         final TextView Username = (TextView) findViewById(R.id.idUporabniskoAdmin);
         final TextView Email = (TextView) findViewById(R.id.idEposta);
-        krog = (ProgressBar)findViewById(R.id.idProgress);
+        //krog = (ProgressBar)findViewById(R.id.idProgress);
         krog.setVisibility(View.INVISIBLE);
         odjava = (Button)findViewById(R.id.idOdjava);
 
