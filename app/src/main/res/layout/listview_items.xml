@@ -14,7 +14,7 @@
             android:layout_column="0"
             android:layout_row="0"
             android:src="@drawable/ic_today_black_24dp"
-            />
+            android:id="@+id/idSlika" />
 
 
         <LinearLayout
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="4dp"
-                android:id="@+id/izvajalci"
+                android:id="@+id/urca"
                 android:textColor="@android:color/holo_red_light" />
 
             <TextView
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="4dp"
-                android:id="@+id/skladbe"
+                android:id="@+id/location"
                 android:textColor="@android:color/holo_red_light" />
 
 

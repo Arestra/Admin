@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.Dogodek;
+import com.example.Seznam;
+
 import java.net.URLEncoder;
 
 import cz.msebera.android.httpclient.HttpRequest;
@@ -30,13 +33,17 @@ public class ActivityDodajDogodek extends AppCompatActivity {
     private EditText lokacija;
 
     final String myTag = "DocsUpload";
+    ApplicationMy app;
+
+    Seznam seznam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dodaj_dogodek);
 
-
+        app = (ApplicationMy)getApplication();
+        seznam=app.getAllData();
 
         nzv = (EditText) findViewById(R.id.idNaziv);
 
@@ -71,17 +78,40 @@ public class ActivityDodajDogodek extends AppCompatActivity {
                 final String strNaslov = naslov.getText().toString();
                 final String strLokacija = lokacija.getText().toString();
 
+                Toast.makeText(ActivityDodajDogodek.this,"Podatki so bili vnešeni in shranjeni!",Toast.LENGTH_SHORT);
+
+
+                Dogodek d=new Dogodek();
+
+                d.setID(seznam.size()+1);
+                d.setNaziv(strNaziv);
+
+                String datum = strDan+"."+strMesec+"."+strLeto;
+                d.setDatum(datum);
+
+                String cas = strUra+":"+strMinuta;
+                d.setCas(cas);
+
+                d.setCena(strCena);
+                d.setPrizorisce(strNaslov);
+                d.setKraj(strLokacija);
+
+                seznam.dodaj(d);
+                app.save();
 
                 Log.i(myTag, "OnCreate()");
                 Thread t = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         PostDataToFile(strNaziv,strDan,strMesec,strLeto,strCena,strUra,strMinuta,strNaslov,strLokacija);
+                        app.save();
                     }
                 });
                 t.start();
 
-                Toast.makeText(ActivityDodajDogodek.this,"Podatki so bili vnešeni in shranjeni!",Toast.LENGTH_SHORT);
+                finish();
+
+
             }
         });
 
@@ -99,5 +129,6 @@ public class ActivityDodajDogodek extends AppCompatActivity {
         String data = "entry.2049629797=" + URLEncoder.encode(nzv.toString()) + "&" + "entry.779257088_year=" + URLEncoder.encode(leto.toString()) + "&" + "entry.779257088_month=" + URLEncoder.encode(mesec.toString()) + "&" + "entry.779257088_day=" + URLEncoder.encode(dan.toString()) + "&" + "entry.2118766818=" + URLEncoder.encode(price.toString()) + "&" + "entry.1168084730_hour=" + URLEncoder.encode(clock.toString()) + "&" + "entry.1168084730_minute=" + URLEncoder.encode(minute.toString()) + "&" + "entry.1104322596=" + URLEncoder.encode(naslov.toString())+ "&" + "entry.588434556=" + URLEncoder.encode(lokacija.toString());
         String response = httpRequest.sendPost(URL, data);
         Log.i(myTag, response);
+        app.save();
     }
 }

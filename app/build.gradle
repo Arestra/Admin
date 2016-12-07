@@ -29,4 +29,6 @@ dependencies {
     compile 'com.android.volley:volley:1.0.0'
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile files ('libs/weka-3.7.0.jar')
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile project(path: ':dogodki')
 }
