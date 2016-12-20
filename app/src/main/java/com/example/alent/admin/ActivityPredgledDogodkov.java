@@ -26,6 +26,7 @@ public class ActivityPredgledDogodkov extends AppCompatActivity {
     ApplicationMy app;
     Seznam s;
     Dogodek d;
+    ActivityPregledDogodkovMainAdapter adap;
     //test
     private ArrayList<String>nekaj;
 
@@ -38,21 +39,22 @@ public class ActivityPredgledDogodkov extends AppCompatActivity {
         s=app.getAllData();
         listView = (ListView)findViewById(R.id.idListDogodkov);
 
-        ActivityPregledDogodkovMainAdapter adap = new ActivityPregledDogodkovMainAdapter(getBaseContext(),R.layout.listview_items);
+        adap = new ActivityPregledDogodkovMainAdapter(getBaseContext(),R.layout.listview_items);
         for(Dogodek d:app.getAllData().getDog()){
             adap.add(d);
         }
         listView.setAdapter(adap);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-           /*     app.getAllData().getDog().remove(position);
+                app.getAllData().getDog().remove(position);
                 app.save();
                 Intent i = new Intent(getApplication(),ActivityAdmin.class);
-                startActivity(i);*/
-
+                startActivity(i);
+                listView.invalidate();
+                //listView.getAdapter().notifyAll();
+                //adapter.notifyDataSetChanged();
             }
         });
     }
@@ -61,5 +63,6 @@ public class ActivityPredgledDogodkov extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         listView.invalidate();
+        adap.notifyDataSetChanged();
     }
 }
