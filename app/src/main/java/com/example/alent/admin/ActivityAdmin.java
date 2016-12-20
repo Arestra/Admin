@@ -52,7 +52,7 @@ public class ActivityAdmin extends AppCompatActivity {
         Toast.makeText(ActivityAdmin.this,"Odjavljanje",Toast.LENGTH_SHORT);
 
         if(odjava.isPressed()) {
-            krog.setVisibility(View.VISIBLE);
+            //krog.setVisibility(View.VISIBLE);
             Intent oknoLogin = new Intent(this, ActivityLogin.class);
             startActivity(oknoLogin);
         }

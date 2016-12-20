@@ -35,29 +35,33 @@ public class ActivityLogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String namestr = Username.getText().toString();
-                String EpostaStr = Eposta.getText().toString();
-                String Geslostr = Geslo.getText().toString();
-                String Geslo2str = PonoviGeslo.getText().toString();
-
-
-                if(!Geslostr.equals(Geslo2str)){
-                    Toast pas = Toast.makeText(ActivityLogin.this,"Gesli se ne ujemata!", Toast.LENGTH_SHORT);
-                    pas.show();
-
+                if(Username.getText().toString().trim().length()<=0 && Eposta.getText().toString().trim().length()<=0 && Geslo.getText().toString().trim().length()<=0 && PonoviGeslo.getText().toString().trim().length()<=0) {
+                    Toast.makeText(ActivityLogin.this, "Prosimo, izpolnite vsa potrebna polja!", Toast.LENGTH_SHORT).show();
                 }
-                else if(!validate()){
-                    Intent novoOkno = new Intent(ActivityLogin.this, ActivityAdmin.class);
-                    novoOkno.putExtra("Uporabnisko", namestr);
-                    novoOkno.putExtra("E-posta", EpostaStr);
-                    startActivity(novoOkno);
-                    Toast.makeText(ActivityLogin.this, "Prijava uspešna", Toast.LENGTH_SHORT);
+                else {
+                    String namestr = Username.getText().toString();
+                    String EpostaStr = Eposta.getText().toString();
+                    String Geslostr = Geslo.getText().toString();
+                    String Geslo2str = PonoviGeslo.getText().toString();
 
-                    Username.setText("");
-                    Eposta.setText("");
-                    Geslo.setText("");
-                    PonoviGeslo.setText("");
 
+                    if (!Geslostr.equals(Geslo2str)) {
+                        Toast pas = Toast.makeText(ActivityLogin.this, "Gesli se ne ujemata!", Toast.LENGTH_SHORT);
+                        pas.show();
+
+                    } else if (!validate()) {
+                        Intent novoOkno = new Intent(ActivityLogin.this, ActivityAdmin.class);
+                        novoOkno.putExtra("Uporabnisko", namestr);
+                        novoOkno.putExtra("E-posta", EpostaStr);
+                        startActivity(novoOkno);
+                        Toast.makeText(ActivityLogin.this, "Prijava uspešna", Toast.LENGTH_SHORT);
+
+                        Username.setText("");
+                        Eposta.setText("");
+                        Geslo.setText("");
+                        PonoviGeslo.setText("");
+
+                    }
                 }
             }
         });
