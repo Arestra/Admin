@@ -54,18 +54,6 @@
         android:textSize="14sp" />
 
     <Button
-        android:text="DODAJ DOGODEK"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/dodajDogodek"
-        android:layout_weight="1"
-        android:onClick="DodajDogodek"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="38dp" />
-
-    <Button
         android:text="ODJAVI SE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -76,16 +64,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:onClick="Odjava" />
-
-    <Button
-            android:text="PREGLED DODANIH DOGODKOV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-        android:id="@+id/idPregledDogodkov"
-        android:onClick="PregledDogodkov"
-        android:layout_below="@+id/dodajDogodek"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
     <ImageView
         app:srcCompat="@drawable/admin"
@@ -99,16 +77,36 @@
         android:layout_alignParentStart="true" />
 
     <Button
-        android:text="Weka"
+        android:text="KLASIFIKACIJA PODATKOV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/wekaButton"
+        android:onClick="WekaKlik"
         android:layout_above="@+id/idOdjava"
-        android:layout_marginBottom="11dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:onClick="WekaKlik" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+            android:text="PREGLED DODANIH DOGODKOV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        android:id="@+id/idPregledDogodkov"
+        android:onClick="PregledDogodkov"
+        android:layout_above="@+id/wekaButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="DODAJ DOGODEK"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dodajDogodek"
+        android:layout_weight="1"
+        android:onClick="DodajDogodek"
+        android:layout_above="@+id/idPregledDogodkov"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

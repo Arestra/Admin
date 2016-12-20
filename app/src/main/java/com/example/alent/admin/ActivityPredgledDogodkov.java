@@ -3,6 +3,7 @@ package com.example.alent.admin;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,8 +28,6 @@ public class ActivityPredgledDogodkov extends AppCompatActivity {
     Seznam s;
     Dogodek d;
     ActivityPregledDogodkovMainAdapter adap;
-    //test
-    private ArrayList<String>nekaj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +35,7 @@ public class ActivityPredgledDogodkov extends AppCompatActivity {
         setContentView(R.layout.activity_predgled_dogodkov);
 
         app = (ApplicationMy)getApplication();
-        s=app.getAllData();
+        //s=app.getAllData();
         listView = (ListView)findViewById(R.id.idListDogodkov);
 
         adap = new ActivityPregledDogodkovMainAdapter(getBaseContext(),R.layout.listview_items);
@@ -48,11 +47,27 @@ public class ActivityPredgledDogodkov extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                app.getAllData().getDog().remove(position);
+                app.getAllData().brisi(position);
+                //Log.d("dogodek",app.getAllData().getDog().toString());
                 app.save();
+                listView.invalidate();
+                adap.notifyDataSetChanged();
+                Log.d("dogodek",app.getAllData().getDog().toString());
+                //s.getDog().remove(position);
+                //Log.d("dogodek",app.getAllData().getDog().toString());
+                /*if(app.save()==true){
+                    Log.d("dogodek",app.getAllData().getDog().toString());
+                    listView.invalidate();
+                    adap.notifyDataSetChanged();
+                    Toast.makeText(ActivityPredgledDogodkov.this,"Podatki so bili spremenjeni in shranjeni",Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(ActivityPredgledDogodkov.this,"Podatki niso bili shranjeni",Toast.LENGTH_SHORT).show();*/
+
+                listView.invalidate();
                 Intent i = new Intent(getApplication(),ActivityAdmin.class);
                 startActivity(i);
-                listView.invalidate();
+
                 //listView.getAdapter().notifyAll();
                 //adapter.notifyDataSetChanged();
             }
