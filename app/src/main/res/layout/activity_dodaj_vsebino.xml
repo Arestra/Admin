@@ -61,24 +61,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/Skladba"
-        android:layout_below="@+id/textView6"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="147dp"
         android:background="?attr/colorControlHighlight"
         android:id="@+id/izvList"
+        android:layout_below="@+id/txtItem"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtItem" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:text="DODAJ"
@@ -89,5 +79,15 @@
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/idShrani"
         android:layout_toStartOf="@+id/idShrani" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/Skladba"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
