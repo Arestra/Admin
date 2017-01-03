@@ -64,7 +64,7 @@ public class ActivityDodajDogodek extends AppCompatActivity {
         shrani.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String strNaziv = nzv.getText().toString();
+                /*final String strNaziv = nzv.getText().toString();
 
                 final String strDan = dan.getText().toString();
                 final String strMesec = mesec.getText().toString();
@@ -111,7 +111,7 @@ public class ActivityDodajDogodek extends AppCompatActivity {
 
                 finish();
 
-
+         */
             }
         });
 
@@ -119,6 +119,29 @@ public class ActivityDodajDogodek extends AppCompatActivity {
 
     public void DodajIzvajalce(View v) {
         Intent oknoIzv = new Intent(ActivityDodajDogodek.this, ActivityDodajVsebino.class);
+        String strNaziv = nzv.getText().toString();
+        String strDan = dan.getText().toString();
+        String strMesec = mesec.getText().toString();
+        String strLeto = leto.getText().toString();
+
+        String strCena = cena.getText().toString();
+
+        String strUra = ura.getText().toString();
+        String strMinuta = minuta.getText().toString();
+
+        String strNaslov = naslov.getText().toString();
+        String strLokacija = lokacija.getText().toString();
+
+        oknoIzv.putExtra("Naziv",strNaziv);
+        oknoIzv.putExtra("Dan",strDan);
+        oknoIzv.putExtra("Mesec",strMesec);
+        oknoIzv.putExtra("Leto",strLeto);
+        oknoIzv.putExtra("Cena",strCena);
+        oknoIzv.putExtra("Ura",strUra);
+        oknoIzv.putExtra("Minuta",strMinuta);
+        oknoIzv.putExtra("Naslov",strNaslov);
+        oknoIzv.putExtra("Lokacija",strLokacija);
+
         startActivity(oknoIzv);
     }
 

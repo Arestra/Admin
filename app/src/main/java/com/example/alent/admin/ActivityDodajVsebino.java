@@ -13,6 +13,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.Seznam;
+
 import org.w3c.dom.Text;
 
 import java.net.URLEncoder;
@@ -30,14 +32,41 @@ public class ActivityDodajVsebino extends AppCompatActivity {
 
     final String myTag = "DocsUpload";
     ApplicationMy app;
+    Seznam seznam;
 
     String izv="";
     String skl="";
+
+    String nzvIzvajalec;
+    String strDan;
+    String strMesec;
+    String strLeto;
+    String strCena;
+    String strUra;
+    String strMinuta;
+    String strNaslov;
+    String strLokacija;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dodaj_vsebino);
+
+        app = (ApplicationMy)getApplication();
+        seznam=app.getAllData();
+
+        Intent get = getIntent();
+        nzvIzvajalec = get.getStringExtra("Naziv");
+        strDan = get.getStringExtra("Dan");
+        strMesec = get.getStringExtra("Mesec");
+        strLeto = get.getStringExtra("Leto");
+        strCena = get.getStringExtra("Cena");
+        strUra = get.getStringExtra("Ura");
+        strMinuta = get.getStringExtra("Minuta");
+        strNaslov = get.getStringExtra("Naslov");
+        strLokacija = get.getStringExtra("Lokacija");
+
 
         izvajalec = (EditText) findViewById(R.id.txtItem);
         skladba = (EditText) findViewById(R.id.Skladba);
@@ -90,7 +119,7 @@ public class ActivityDodajVsebino extends AppCompatActivity {
                 Thread t = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        PostDataToFile(izv, skl);
+                        PostDataToFile(nzvIzvajalec,strDan,strMesec,strLeto,strCena,strUra,strMinuta,strNaslov,strLokacija,izv, skl);
                     }
                 });
                 t.start();
@@ -102,11 +131,11 @@ public class ActivityDodajVsebino extends AppCompatActivity {
         });
     }
 
-    public void PostDataToFile(String IzvNzv, String SklNzv) {
+    public void PostDataToFile(String nzv,String dan, String mesec, String leto, String price,String clock,String minute, String naslov, String lokacija, String IzvNzv, String SklNzv) {
         String URL = "https://docs.google.com/forms/d/e/1FAIpQLSduR3EnYwJMJYMnUYfN2kKg16B5-jQq98Pmdn8cgMV7WULrzA/formResponse";
         com.example.alent.admin.HttpRequest httpRequest = new com.example.alent.admin.HttpRequest();
 
-        String data = "entry.614812540=" + URLEncoder.encode(IzvNzv.toString()) + "&" + "entry.2055276325=" + URLEncoder.encode(SklNzv.toString());
+        String data = "entry.2049629797=" + URLEncoder.encode(nzv.toString()) + "&" + "entry.779257088_year=" + URLEncoder.encode(leto.toString()) + "&" + "entry.779257088_month=" + URLEncoder.encode(mesec.toString()) + "&" + "entry.779257088_day=" + URLEncoder.encode(dan.toString()) + "&" + "entry.2118766818=" + URLEncoder.encode(price.toString()) + "&" + "entry.1168084730_hour=" + URLEncoder.encode(clock.toString()) + "&" + "entry.1168084730_minute=" + URLEncoder.encode(minute.toString()) + "&" + "entry.1104322596=" + URLEncoder.encode(naslov.toString())+ "&" + "entry.588434556=" + URLEncoder.encode(lokacija.toString()) + "&" +"entry.614812540=" + URLEncoder.encode(IzvNzv.toString()) + "&" + "entry.2055276325=" + URLEncoder.encode(SklNzv.toString());
         String response = httpRequest.sendPost(URL, data);
         Log.i(myTag, response);
     }
