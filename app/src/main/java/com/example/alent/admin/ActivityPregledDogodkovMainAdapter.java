@@ -34,6 +34,7 @@ public class ActivityPregledDogodkovMainAdapter extends ArrayAdapter {
         TextView txtN;
         TextView ura;
         TextView locate;
+        TextView Weka;
     }
 
     @Override
@@ -53,6 +54,7 @@ public class ActivityPregledDogodkovMainAdapter extends ArrayAdapter {
             handler.txtN = (TextView) row.findViewById(R.id.idDogodek);
             handler.ura = (TextView) row.findViewById(R.id.urca);
             handler.locate = (TextView) row.findViewById(R.id.location);
+            handler.Weka = (TextView)row.findViewById(R.id.weka);
             row.setTag(handler);
             }
             else{
@@ -64,6 +66,7 @@ public class ActivityPregledDogodkovMainAdapter extends ArrayAdapter {
             handler.txtN.setText(dog.getNaziv());
             handler.ura.setText(dog.getCas());
             handler.locate.setText(dog.getKraj());
+            handler.Weka.setText(dog.getKlASS());
             return row;
         }
 

@@ -98,14 +98,14 @@ public class WekaClassification extends AppCompatActivity {
         if(t.equals("")||l.equals("")||p.equals("")||c.equals("")||lo.equals("")||ude.equals("")||oc.equals("")||k.equals("")){
             mojaVsebina ="@relation DogodkiNaSlovenskem\n" +
                     "\n" +
-                    "@attribute Tip {Pop,Rock,Narodno-zabavni,Hip-Hop,Classic}\n" +
-                    "@attribute ' Naslov-lokala' {' Disco_Planet',' Na_odprtem',' Stuk',' Pub_Beli_Konj',' Trust',' Bar_Lunca',' Plus-Minus'}\n" +
-                    "@attribute ' Pricetek' {' Dopoldan',' Popoldan',' Zvecer'}\n" +
-                    "@attribute ' Cena' {' Brezplacno',' 3€',' 5€',' 10€',' 15€',' 20€'}\n" +
-                    "@attribute ' Lokacija' {' Celje',' Sentjur',' Maribor',' Slovenske_Konjice',' Slovenska_Bistrica'}\n" +
-                    "@attribute ' Udelezba' {' 1x',' 3x',' 2x',' veckrat'}\n" +
-                    "@attribute ' Ocena_dogodka' numeric\n" +
-                    "@attribute ' Class' {' Povprecen',' Dober',' Priporocljiv',' Priporocljiv ',' Povprecen ',' Dober '}\n" +
+                    "@attribute Tip{Pop,Rock,Narodno-zabavni,Hip-Hop,Classic}\n" +
+                    "@attribute Naslov-lokala{Disco_Planet,Na_odprtem,Stuk,Pub_Beli_Konj,Trust,Bar_Lunca,Plus-Minus}\n" +
+                    "@attribute Pricetek{Dopoldan,Popoldan,Zvecer}\n" +
+                    "@attribute Cena{Brezplacno,3€,5€,10€,15€,20€}\n" +
+                    "@attribute Lokacija{Celje,Sentjur,Maribor,Slovenske_Konjice,Slovenska_Bistrica}\n" +
+                    "@attribute Udelezba{1x,3x,2x,veckrat}\n" +
+                    "@attribute Ocena_dogodka numeric\n" +
+                    "@attribute Class{Povprecen,Dober,Priporocljiv}\n" +
                     "\n" +
                     "@data\n" +
                     "Pop,' Disco_Planet',' Dopoldan',' Brezplacno',' Celje',' 1x',5,' Povprecen'\n" +

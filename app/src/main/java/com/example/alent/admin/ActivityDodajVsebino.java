@@ -126,6 +126,7 @@ public class ActivityDodajVsebino extends AppCompatActivity {
                 finish();
 
                 Intent i = new Intent(ActivityDodajVsebino.this,ActivityAdmin.class);
+                app.save();
                 startActivity(i);
             }
         });
