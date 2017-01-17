@@ -19,6 +19,7 @@ public class ActivityLogin extends AppCompatActivity {
     EditText Eposta;
     EditText Geslo;
     EditText PonoviGeslo;
+    Button dct;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,15 @@ public class ActivityLogin extends AppCompatActivity {
         Eposta = (EditText)findViewById(R.id.idEmail);
         Geslo = (EditText)findViewById(R.id.idGeslo);
         PonoviGeslo = (EditText)findViewById(R.id.idPonoviGeslo);
+        dct = (Button)findViewById(R.id.idStisni);
+
+        dct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ActivityLogin.this,DCT_stiskanjeSlik.class);
+                startActivity(i);
+            }
+        });
 
         final Button prijava = (Button)findViewById(R.id.idUporabniskoPrijava);
 

@@ -344,7 +344,7 @@ public class ActivityDodajDogodek extends AppCompatActivity {
         catch (Exception e) {
             e.printStackTrace();
         }
-        startActivity(oknoIzv);
+        //startActivity(oknoIzv);
     }
 
      public void KlasifikacijaJ481(){
